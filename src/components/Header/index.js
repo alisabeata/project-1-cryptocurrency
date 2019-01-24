@@ -1,9 +1,10 @@
 import React from "react";
+import './index.css';
 import HeaderCurrency from "./HeaderCurrency";
 
 function Header() {
   return (
-    <div>
+    <div className="header">
       <span>Logo</span>
       <HeaderCurrency />
     </div>
