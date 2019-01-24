@@ -1,5 +1,5 @@
-import React from 'react';
-import HeaderCurrency from './HeaderCurrency';
+import React from "react";
+import HeaderCurrency from "./HeaderCurrency";
 
 function Header() {
   return (
