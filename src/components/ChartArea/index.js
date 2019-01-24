@@ -4,7 +4,7 @@ import Chart from "./Chart";
 function ChartArea() {
   return (
     <div>
-      <span>Chart</span>
+      <span>Chart: BTC</span>
       <Chart />
     </div>
   );

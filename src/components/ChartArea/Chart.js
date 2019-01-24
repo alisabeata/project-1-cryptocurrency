@@ -5,11 +5,11 @@ import React, { PureComponent } from "react";
 import { Line } from "react-chartjs-2";
 import { getDailyBTC } from "./../../api";
 
-let data = {
-  labels: [...new Array(24).keys()],
+const data = {
+  labels: [],
   datasets: [
     {
-      label: "BTC",
+      label: "buy",
       fill: false,
       lineTension: 0.1,
       borderColor: "#EC932F",
@@ -19,6 +19,18 @@ let data = {
       pointHoverBackgroundColor: "#EC932F",
       pointHoverBorderColor: "#EC932F",
       data: []
+    },
+    {
+      label: "sell",
+      fill: false,
+      lineTension: 0.1,
+      borderColor: "#beb1d7",
+      backgroundColor: "#beb1d7",
+      pointBorderColor: "#beb1d7",
+      pointBackgroundColor: "#beb1d7",
+      pointHoverBackgroundColor: "#beb1d7",
+      pointHoverBorderColor: "#beb1d7",
+      data: []
     }
   ]
 };
@@ -26,28 +38,41 @@ let data = {
 class Chart extends PureComponent {
   state = {
     time: [],
-    points: []
+    buyPrices: [],
+    sellPrices: []
   };
 
   componentDidMount() {
-    getDailyBTC().then(data => {
-      const time = data.Data.map(item => {
-        const date = new Date(item.time);
-        const hours = date.getHours().toString();
-        const minutes = date.getMinutes().toString();
-        return `${hours.length < 2 ? "0" + hours : hours}:${minutes.length < 2 ? minutes + "0" : minutes}`;
-      });
-      const res = data.Data.map(item => item.high);
+    const now = new Date();
+    const arr = Array.from({ length: 23 }, (_, ind) => {
+      let hour = now.getHours() - ind;
 
-      this.setState({ time: [...time], points: [...res] });
+      if (hour < 0) hour += 24;
+
+      return `${hour.length < 2 ? "0" + hour : hour}:00`;
+    }).reverse();
+
+    this.setState({ ...this.state, time: arr });
+
+    getDailyBTC().then(data => {
+      const arrSell = data.Data.map(item => item.high);
+      const arrBuy = data.Data.map(item => item.low);
+
+      this.setState({
+        ...this.state,
+        buyPrices: arrBuy,
+        sellPrices: arrSell
+      });
     });
   }
 
   render() {
-    const { time, points } = this.state;
+    const { time, buyPrices, sellPrices } = this.state;
+
     data.labels = time;
-    data.datasets[0].data = points;
-    //console.log(data)
+    data.datasets[0].data = buyPrices;
+    data.datasets[1].data = sellPrices;
+
     return (
       <div>
         <Line data={data} />
