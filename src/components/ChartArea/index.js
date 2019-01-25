@@ -1,5 +1,5 @@
-import React from "react";
-import Chart from "./Chart";
+import React from 'react';
+import Chart from './Chart';
 
 function ChartArea() {
   return (

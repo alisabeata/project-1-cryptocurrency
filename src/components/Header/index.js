@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react';
 import './index.css';
-import HeaderCurrency from "./HeaderCurrency";
+import logo from './logo.svg';
+import HeaderCurrency from './HeaderCurrency';
 
 function Header() {
   return (
     <div className="header">
-      <span>Logo</span>
+      <img src={logo} className="header__logo" alt="logo" />
       <HeaderCurrency />
     </div>
   );

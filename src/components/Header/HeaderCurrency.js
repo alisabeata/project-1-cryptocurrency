@@ -1,31 +1,31 @@
-import React, { PureComponent } from "react";
-import { getCurrency } from "./../../api";
+import React, {PureComponent} from 'react';
+import {getCurrency} from './../../api';
 
 class HeaderCurrency extends PureComponent {
   state = {
     currentRate: {
       BTC: {
         EUR: 0,
-        USD: 0
+        USD: 0,
       },
       ETH: {
         EUR: 0,
-        USD: 0
-      }
-    }
+        USD: 0,
+      },
+    },
   };
 
   componentDidMount() {
     getCurrency().then(data => {
-      this.setState({ currentRate: { ...data } });
+      this.setState({currentRate: {...data}});
     });
   }
 
   render() {
-    const { BTC, ETH } = this.state.currentRate;
+    const {BTC, ETH} = this.state.currentRate;
 
     return (
-      <div>
+      <div className="header__currency">
         <ul>
           <li>BTC/EUR: {BTC.EUR}</li>
           <li>BTC/USD: {BTC.USD}</li>
@@ -40,4 +40,3 @@ class HeaderCurrency extends PureComponent {
 }
 
 export default HeaderCurrency;
-
