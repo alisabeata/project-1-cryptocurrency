@@ -5,6 +5,10 @@
 }
 
 .header__logo {
-  width: 100px;
-  height: 90px;
+  width: 90px;
+  height: 80px;
+}
+
+.header__currency {
+  text-align: left;
 }

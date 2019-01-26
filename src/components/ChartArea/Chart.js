@@ -5,31 +5,34 @@ import React, {PureComponent} from 'react';
 import {Line} from 'react-chartjs-2';
 import {getDailyBTC} from './../../api';
 
+const buyColor = '#ec932f';
+const sellColor = '#beb1d7';
+const chartStroke = 0.1;
 const data = {
   labels: [],
   datasets: [
     {
       label: 'buy',
       fill: false,
-      lineTension: 0.1,
-      borderColor: '#EC932F',
-      backgroundColor: '#EC932F',
-      pointBorderColor: '#EC932F',
-      pointBackgroundColor: '#EC932F',
-      pointHoverBackgroundColor: '#EC932F',
-      pointHoverBorderColor: '#EC932F',
+      lineTension: chartStroke,
+      borderColor: buyColor,
+      backgroundColor: buyColor,
+      pointBorderColor: buyColor,
+      pointBackgroundColor: buyColor,
+      pointHoverBackgroundColor: buyColor,
+      pointHoverBorderColor: buyColor,
       data: [],
     },
     {
       label: 'sell',
       fill: false,
-      lineTension: 0.1,
-      borderColor: '#beb1d7',
-      backgroundColor: '#beb1d7',
-      pointBorderColor: '#beb1d7',
-      pointBackgroundColor: '#beb1d7',
-      pointHoverBackgroundColor: '#beb1d7',
-      pointHoverBorderColor: '#beb1d7',
+      lineTension: chartStroke,
+      borderColor: sellColor,
+      backgroundColor: sellColor,
+      pointBorderColor: sellColor,
+      pointBackgroundColor: sellColor,
+      pointHoverBackgroundColor: sellColor,
+      pointHoverBorderColor: sellColor,
       data: [],
     },
   ],
@@ -52,17 +55,17 @@ class Chart extends PureComponent {
       return `${hour.length < 2 ? '0' + hour : hour}:00`;
     }).reverse();
 
-    this.setState({...this.state, time: arr});
+    this.setState(state => ({...state, time: arr}));
 
     getDailyBTC().then(data => {
       const arrSell = data.Data.map(item => item.high);
       const arrBuy = data.Data.map(item => item.low);
 
-      this.setState({
-        ...this.state,
+      this.setState(state => ({
+        ...state,
         buyPrices: arrBuy,
         sellPrices: arrSell,
-      });
+      }));
     });
   }
 

@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {getCurrency} from './../../api';
 
-class HeaderCurrency extends PureComponent {
+class HeaderCurrency extends Component {
   state = {
     currentRate: {
       BTC: {
@@ -17,7 +17,7 @@ class HeaderCurrency extends PureComponent {
 
   componentDidMount() {
     getCurrency().then(data => {
-      this.setState({currentRate: {...data}});
+      this.setState(state => ({...state, currentRate: data}));
     });
   }
 
