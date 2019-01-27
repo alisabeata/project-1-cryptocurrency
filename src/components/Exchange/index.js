@@ -25,15 +25,15 @@ class Exchange extends Component {
             value={balance.BTC}
             onChange={this.handleCurrency}
           />
-          BTC
+          <span>BTC</span>
         </label>
         <label>
           <input type="text" value="0" onChange={this.handleCurrency} />
-          USD
+          <span>USD</span>
         </label>
         <label>
           <input type="text" value="0" onChange={this.handleCurrency} />
-          EUR
+          <span>EUR</span>
         </label>
       </div>
     );

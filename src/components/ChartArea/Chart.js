@@ -7,14 +7,14 @@ import {getDailyBTC} from './../../api';
 
 const buyColor = '#ec932f';
 const sellColor = '#beb1d7';
-const chartStroke = 0.1;
+const chartlineTension = 0.1;
 const data = {
   labels: [],
   datasets: [
     {
       label: 'buy',
       fill: false,
-      lineTension: chartStroke,
+      lineTension: chartlineTension,
       borderColor: buyColor,
       backgroundColor: buyColor,
       pointBorderColor: buyColor,
@@ -26,7 +26,7 @@ const data = {
     {
       label: 'sell',
       fill: false,
-      lineTension: chartStroke,
+      lineTension: chartlineTension,
       borderColor: sellColor,
       backgroundColor: sellColor,
       pointBorderColor: sellColor,
