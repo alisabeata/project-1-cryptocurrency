@@ -1,5 +1,7 @@
 import React from 'react';
 
+// обработка клика кнопок с передачей значений в componentDidUpdate
+
 function ChartButtons() {
   return (
     <div>
