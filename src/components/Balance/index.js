@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Balance extends Component {
   state = {
@@ -6,6 +7,14 @@ class Balance extends Component {
       BTC: 0,
       USD: 0,
       EUR: 0,
+    },
+  };
+
+  static propTypes = {
+    balance: {
+      BTC: PropTypes.number,
+      USD: PropTypes.number,
+      EUR: PropTypes.number,
     },
   };
 

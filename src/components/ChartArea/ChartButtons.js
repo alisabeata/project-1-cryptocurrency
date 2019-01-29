@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Button from './Button';
 
-function ChartButtons() {
-  return (
-    <div>
-      <Button>15m</Button>
-      <Button>1h</Button>
-      <Button>6h</Button>
-      <Button>1d</Button>
-      <Button>30d</Button>
-    </div>
-  );
+class ChartButtons extends Component {
+  state = {
+    buttons: ['15m', '1h', '6h', '1d', '30d'],
+  };
+  render() {
+    const {buttons} = this.state;
+
+    return (
+      <div>
+        {buttons.map(button => (
+          <Button>{button}</Button>
+        ))}
+      </div>
+    );
+  }
 }
 
 export default ChartButtons;
