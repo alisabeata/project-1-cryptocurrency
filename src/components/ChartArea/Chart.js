@@ -59,6 +59,8 @@ class Chart extends PureComponent {
   };
 
   setDataDailyChart = () => {
+    this.setState(state => ({...state, time: this.setHoursDailyChart()}));
+
     getDailyBTC().then(data => {
       const arrSell = data.Data.map(item => item.high);
       const arrBuy = data.Data.map(item => item.low);
@@ -73,7 +75,7 @@ class Chart extends PureComponent {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const {time, buyPrices, sellPrices} = prevState;
-    
+
     console.log(nextProps, prevState);
     data.labels = time;
     data.datasets[0].data = buyPrices;
@@ -83,7 +85,6 @@ class Chart extends PureComponent {
   }
 
   componentDidMount() {
-    this.setState(state => ({...state, time: this.setHoursDailyChart()}));
     this.setDataDailyChart();
   }
 

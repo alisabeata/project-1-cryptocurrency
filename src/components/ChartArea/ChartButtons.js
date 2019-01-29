@@ -1,15 +1,14 @@
 import React from 'react';
-
-// обработка клика кнопок с передачей значений в componentDidUpdate
+import Button from './Button';
 
 function ChartButtons() {
   return (
     <div>
-      <button>15m</button>
-      <button>1h</button>
-      <button>6h</button>
-      <button>1d</button>
-      <button>30d</button>
+      <Button>15m</Button>
+      <Button>1h</Button>
+      <Button>6h</Button>
+      <Button>1d</Button>
+      <Button>30d</Button>
     </div>
   );
 }
