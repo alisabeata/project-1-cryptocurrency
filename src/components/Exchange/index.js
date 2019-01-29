@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // TODO: redux for balance
 
@@ -6,6 +7,16 @@ class Exchange extends Component {
   state = {
     balance: {
       BTC: 0,
+      USD: 0,
+      EUR: 0,
+    },
+  };
+
+  static propTypes = {
+    balance: {
+      BTC: PropTypes.number,
+      USD: PropTypes.number,
+      EUR: PropTypes.number,
     },
   };
 
@@ -14,27 +25,19 @@ class Exchange extends Component {
   };
 
   render() {
-    const {balance} = this.state;
-
     return (
       <div>
         <p>Exchange</p>
-        <label>
-          <input
-            type="text"
-            value={balance.BTC}
-            onChange={this.handleCurrency}
-          />
-          <span>BTC</span>
-        </label>
-        <label>
-          <input type="text" value="0" onChange={this.handleCurrency} />
-          <span>USD</span>
-        </label>
-        <label>
-          <input type="text" value="0" onChange={this.handleCurrency} />
-          <span>EUR</span>
-        </label>
+        {Object.keys(this.state.balance).map(item => (
+          <label>
+            <input
+              type="text"
+              value={this.state.balance[item]}
+              onChange={this.handleCurrency}
+            />
+            <span>{item}</span>
+          </label>
+        ))}
       </div>
     );
   }

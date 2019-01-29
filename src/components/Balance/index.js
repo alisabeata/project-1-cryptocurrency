@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
 
 class Balance extends Component {
-  state = {};
+  state = {
+    balance: {
+      BTC: 0,
+      USD: 0,
+      EUR: 0,
+    },
+  };
+
   render() {
     return (
       <div>
         <p>Balance</p>
-        <span>0USD</span>
-        <span>0EUR</span>
-        <span>0BTC</span>
-        <span>0ETH</span>
+        {Object.keys(this.state.balance).map(item => (
+          <p>
+            <span>{this.state.balance[item]}</span>
+            <span>{item}</span>
+          </p>
+        ))}
       </div>
     );
   }
