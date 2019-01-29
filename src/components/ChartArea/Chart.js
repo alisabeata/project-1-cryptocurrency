@@ -4,45 +4,63 @@
 import React, {PureComponent} from 'react';
 import {Line} from 'react-chartjs-2';
 import {getDailyBTC} from './../../api';
+import PropTypes from 'prop-types';
 
-const buyColor = '#ec932f';
-const sellColor = '#beb1d7';
-const chartlineTension = 0.1;
-const data = {
-  labels: [],
-  datasets: [
-    {
-      label: 'buy',
-      fill: false,
-      lineTension: chartlineTension,
-      borderColor: buyColor,
-      backgroundColor: buyColor,
-      pointBorderColor: buyColor,
-      pointBackgroundColor: buyColor,
-      pointHoverBackgroundColor: buyColor,
-      pointHoverBorderColor: buyColor,
-      data: [],
-    },
-    {
-      label: 'sell',
-      fill: false,
-      lineTension: chartlineTension,
-      borderColor: sellColor,
-      backgroundColor: sellColor,
-      pointBorderColor: sellColor,
-      pointBackgroundColor: sellColor,
-      pointHoverBackgroundColor: sellColor,
-      pointHoverBorderColor: sellColor,
-      data: [],
-    },
-  ],
+const options = {
+  buyColor: '#ec932f',
+  sellColor: '#beb1d7',
+  chartlineTension: 0.1,
 };
 
 class Chart extends PureComponent {
   state = {
-    time: [],
-    buyPrices: [],
-    sellPrices: [],
+    data: {
+      labels: [],
+      datasets: [
+        {
+          label: 'buy',
+          fill: false,
+          lineTension: options.chartlineTension,
+          borderColor: options.buyColor,
+          backgroundColor: options.buyColor,
+          pointBorderColor: options.buyColor,
+          pointBackgroundColor: options.buyColor,
+          pointHoverBackgroundColor: options.buyColor,
+          pointHoverBorderColor: options.buyColor,
+          data: [],
+        },
+        {
+          label: 'sell',
+          fill: false,
+          lineTension: options.chartlineTension,
+          borderColor: options.sellColor,
+          backgroundColor: options.sellColor,
+          pointBorderColor: options.sellColor,
+          pointBackgroundColor: options.sellColor,
+          pointHoverBackgroundColor: options.sellColor,
+          pointHoverBorderColor: options.sellColor,
+          data: [],
+        },
+      ],
+    },
+  };
+
+  static propTypes = {
+    data: PropTypes.shape({
+      labels: PropTypes.array.isRequired,
+      datasets: PropTypes.arrayOf(PropTypes.shape({
+        label: PropTypes.string,
+        fill: PropTypes.bool,
+        lineTension: PropTypes.string,
+        borderColor: PropTypes.string,
+        backgroundColor: PropTypes.string,
+        pointBorderColor: PropTypes.string,
+        pointBackgroundColor: PropTypes.string,
+        pointHoverBackgroundColor: PropTypes.string,
+        pointHoverBorderColor: PropTypes.string,
+        data: PropTypes.array.isRequired,
+      }))
+    }),
   };
 
   setHoursDailyChart = () => {
@@ -59,30 +77,24 @@ class Chart extends PureComponent {
   };
 
   setDataDailyChart = () => {
-    this.setState(state => ({...state, time: this.setHoursDailyChart()}));
+    this.setState(state => ({
+      data: {
+        ...state.data,
+        labels: this.setHoursDailyChart()
+      }
+    }));
 
     getDailyBTC().then(data => {
-      const arrSell = data.Data.map(item => item.high);
       const arrBuy = data.Data.map(item => item.low);
+      const arrSell = data.Data.map(item => item.high);
+      const nextState = {...this.state.data.datasets};
 
-      this.setState(state => ({
-        ...state,
-        buyPrices: arrBuy,
-        sellPrices: arrSell,
-      }));
+      nextState[0].data = arrBuy;
+      nextState[1].data = arrSell;
+
+      this.setState({nextState});
     });
   };
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const {time, buyPrices, sellPrices} = prevState;
-
-    console.log(nextProps, prevState);
-    data.labels = time;
-    data.datasets[0].data = buyPrices;
-    data.datasets[1].data = sellPrices;
-
-    return null;
-  }
 
   componentDidMount() {
     this.setDataDailyChart();
@@ -90,11 +102,7 @@ class Chart extends PureComponent {
 
   render() {
     console.log('render');
-    return (
-      <div>
-        <Line data={data} />
-      </div>
-    );
+    return <Line data={this.state.data} />;
   }
 }
 
