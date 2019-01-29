@@ -5,7 +5,7 @@ class Button extends Component {
   state = {};
 
   static propTypes = {
-    children: PropTypes.string
+    children: PropTypes.string,
   };
 
   handleClick = event => {

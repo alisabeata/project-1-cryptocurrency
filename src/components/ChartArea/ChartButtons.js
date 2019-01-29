@@ -9,9 +9,9 @@ class ChartButtons extends Component {
     const {buttons} = this.state;
 
     return (
-      <div>
+      <div >
         {buttons.map(button => (
-          <Button>{button}</Button>
+          <Button key={button}>{button}</Button>
         ))}
       </div>
     );

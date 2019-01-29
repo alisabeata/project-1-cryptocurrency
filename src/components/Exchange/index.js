@@ -13,11 +13,11 @@ class Exchange extends Component {
   };
 
   static propTypes = {
-    balance: {
+    balance: PropTypes.shape({
       BTC: PropTypes.number,
       USD: PropTypes.number,
       EUR: PropTypes.number,
-    },
+    }),
   };
 
   handleCurrency = event => {
@@ -29,7 +29,7 @@ class Exchange extends Component {
       <div>
         <p>Exchange</p>
         {Object.keys(this.state.balance).map(item => (
-          <label>
+          <label key={item}>
             <input
               type="text"
               value={this.state.balance[item]}

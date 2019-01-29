@@ -11,11 +11,11 @@ class Balance extends Component {
   };
 
   static propTypes = {
-    balance: {
+    balance: PropTypes.shape({
       BTC: PropTypes.number,
       USD: PropTypes.number,
       EUR: PropTypes.number,
-    },
+    }),
   };
 
   render() {
@@ -23,7 +23,7 @@ class Balance extends Component {
       <div>
         <p>Balance</p>
         {Object.keys(this.state.balance).map(item => (
-          <p>
+          <p key={item}>
             <span>{this.state.balance[item]}</span>
             <span>{item}</span>
           </p>
