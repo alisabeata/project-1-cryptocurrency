@@ -1,7 +1,7 @@
 // lib: https://www.chartjs.org/docs/latest/
 // demo: http://jerairrest.github.io/react-chartjs-2/
 
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {Line} from 'react-chartjs-2';
 import {getDailyBTC} from './../../api';
 import PropTypes from 'prop-types';
@@ -9,10 +9,10 @@ import PropTypes from 'prop-types';
 const options = {
   buyColor: '#ec932f',
   sellColor: '#beb1d7',
-  chartlineTension: 0.1,
+  chartlineTension: 0,
 };
 
-class Chart extends PureComponent {
+class Chart extends Component {
   state = {
     data: {
       labels: [],
@@ -48,18 +48,20 @@ class Chart extends PureComponent {
   static propTypes = {
     data: PropTypes.shape({
       labels: PropTypes.array.isRequired,
-      datasets: PropTypes.arrayOf(PropTypes.shape({
-        label: PropTypes.string,
-        fill: PropTypes.bool,
-        lineTension: PropTypes.string,
-        borderColor: PropTypes.string,
-        backgroundColor: PropTypes.string,
-        pointBorderColor: PropTypes.string,
-        pointBackgroundColor: PropTypes.string,
-        pointHoverBackgroundColor: PropTypes.string,
-        pointHoverBorderColor: PropTypes.string,
-        data: PropTypes.array.isRequired,
-      }))
+      datasets: PropTypes.arrayOf(
+        PropTypes.shape({
+          label: PropTypes.string,
+          fill: PropTypes.bool,
+          lineTension: PropTypes.string,
+          borderColor: PropTypes.string,
+          backgroundColor: PropTypes.string,
+          pointBorderColor: PropTypes.string,
+          pointBackgroundColor: PropTypes.string,
+          pointHoverBackgroundColor: PropTypes.string,
+          pointHoverBorderColor: PropTypes.string,
+          data: PropTypes.array.isRequired,
+        })
+      ),
     }),
   };
 
@@ -80,8 +82,8 @@ class Chart extends PureComponent {
     this.setState(state => ({
       data: {
         ...state.data,
-        labels: this.setHoursDailyChart()
-      }
+        labels: this.setHoursDailyChart(),
+      },
     }));
 
     getDailyBTC().then(data => {

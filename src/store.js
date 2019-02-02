@@ -1,6 +1,8 @@
 import {createStore, compose} from 'redux';
 import {rootReducer} from './reducers';
 
+// initialState связать с локал сторадж
+
 export default initialState =>
   createStore(
     rootReducer,
