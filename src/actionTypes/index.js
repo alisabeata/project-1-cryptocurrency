@@ -1,5 +1,3 @@
-// example
-// TODO: change action types
-export const ADD_TODO = 'ADD_TODO';
-export const TOGGLE_TODO = 'TOGGLE_TODO';
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+export const UPD_BALANCE_BTC = 'UPD_BALANCE_BTC';
+export const UPD_BALANCE_EUR = 'UPD_BALANCE_EUR';
+export const UPD_BALANCE_USD = 'UPD_BALANCE_USD';
