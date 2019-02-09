@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import {updBalanceBTC} from './../../actionCreators';
 
 class Balance extends Component {
-  
-
   render() {
     const {balanceBTC, balanceEUR, balanceUSD, updBalanceBTC} = this.props;
 
@@ -23,9 +21,7 @@ class Balance extends Component {
           <span>USD</span>
           <span>{balanceUSD}</span>
         </p>
-        <button onClick={() => updBalanceBTC(1000)}>
-          add
-        </button>
+        <button onClick={() => updBalanceBTC(balanceBTC + 1000)}>add</button>
       </div>
     );
   }

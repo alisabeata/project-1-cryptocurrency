@@ -5,11 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import createStore from './store';
 import {Provider} from 'react-redux';
+import {loadState, saveState} from './localStorage';
 
-const store = createStore();
+const store = createStore(loadState());
 
 store.subscribe(() => {
-  console.log(store.getState());
+  saveState(store.getState());
 });
 
 ReactDOM.render(
