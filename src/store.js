@@ -1,17 +1,21 @@
-import {createStore, compose} from 'redux';
+import {createStore, compose, applyMiddleware} from 'redux';
 import {rootReducer} from './reducers';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
 
-const initialState = {
-  balanceBTC: 0,
-  balanceEUR: 0,
-  balanceUSD: 0,
-};
+const sagaMiddleware = createSagaMiddleware();
 
-export default (state = initialState) =>
-  createStore(
+export default initialState => {
+  const store = createStore(
     rootReducer,
-    state,
+    initialState,
     compose(
+      applyMiddleware(sagaMiddleware),
       window.devToolsExtension ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
     )
   );
+
+  sagaMiddleware.run(rootSaga);
+
+  return store;
+};

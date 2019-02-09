@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {updBalanceBTC} from './../../actionCreators';
+import {updBalanceBtc} from './../../actions';
 
 class Balance extends Component {
   render() {
-    const {balanceBTC, balanceEUR, balanceUSD, updBalanceBTC} = this.props;
-
+    const {balanceBTC, balanceEUR, balanceUSD, updBalanceBtc} = this.props;
+    console.log(updBalanceBtc)
     return (
       <div>
         <p>Balance</p>
@@ -21,20 +21,23 @@ class Balance extends Component {
           <span>USD</span>
           <span>{balanceUSD}</span>
         </p>
-        <button onClick={() => updBalanceBTC(balanceBTC + 1000)}>add</button>
+        <button onClick={() => updBalanceBtc(balanceBTC + 1000)}>add</button>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  balanceBTC: state.balanceBTC,
-  balanceEUR: state.balanceEUR,
-  balanceUSD: state.balanceUSD,
-});
+const mapStateToProps = state => {
+  console.log(state)
+  return ({
+    balanceBTC: state.balanceBTC,
+    balanceEUR: state.balanceEUR,
+    balanceUSD: state.balanceUSD,
+  });
+};
 
 const mapDispatchToProps = {
-  updBalanceBTC,
+  updBalanceBtc,
 };
 
 export default connect(
