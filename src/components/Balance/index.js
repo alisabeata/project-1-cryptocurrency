@@ -5,7 +5,7 @@ import {updBalanceBtc} from './../../actions';
 class Balance extends Component {
   render() {
     const {balanceBTC, balanceEUR, balanceUSD, updBalanceBtc} = this.props;
-    console.log(updBalanceBtc)
+
     return (
       <div>
         <p>Balance</p>
@@ -28,12 +28,12 @@ class Balance extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
-  return ({
+  console.log(state);
+  return {
     balanceBTC: state.balanceBTC,
     balanceEUR: state.balanceEUR,
     balanceUSD: state.balanceUSD,
-  });
+  };
 };
 
 const mapDispatchToProps = {

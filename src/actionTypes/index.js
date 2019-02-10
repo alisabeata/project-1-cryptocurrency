@@ -1,3 +1,0 @@
-export const UPD_BALANCE_BTC = 'UPD_BALANCE_BTC';
-export const UPD_BALANCE_EUR = 'UPD_BALANCE_EUR';
-export const UPD_BALANCE_USD = 'UPD_BALANCE_USD';
